@@ -1,0 +1,29 @@
+Notes from meeting 28/11/16
+
+
+Over the weekend Paul has established that the segfaults in the Arduino executions were being caused by errors in the STL library. Unfortunately this is not a quick fix, as we rely on this library throughout the code, so we will not have a live demo tomorrow.
+
+
+PRESENTATION
+
+Slides: https://docs.google.com/presentation/d/1DEKlFuR7fFuEdrvvo42mWcFi5WNAkwgT66iXIDaPzkI/edit?usp=sharing
+
+DavidD - Project management, goals/requirements/use cases, Services
+Paul - High-level system design, UML diagram
+Jack - Message spec document
+DavidP - Packet and PacketQueue classes, byte stuffing
+Kyle - Service and ServiceTable classes
+Gary - Message passing and queuing, website
+Pete - Resource discovery algorithm
+Andrew - Initialisation procedure
+Everyone - Q and A
+
+
+FUTURE WORK
+
+Next - port to Pi and see if it works using standard library. Then implement data structures for Arduino and replace STL references. Once message generation/routing works, we need to implement resource discovery and node initialisation. Then we will start expanding on the application layer on top of the Comms protocol, such as building publish/subscribe functionality or RPC.
+
+
+ROVER NIGHT OUT
+
+Suggested Rover night out on Saturday 3/12 or next week. TBC after presentation.
