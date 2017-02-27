@@ -1,7 +1,7 @@
 #include <ResourceDiscovery.h>
 #include <HardwareSerial.h>
 
-
+#include <Message.h>
 ResourceDiscovery::ResourceDiscovery() {
 
 }
@@ -24,10 +24,29 @@ void advertise(){
 			s.setPortDistance(it2->first,((it2->second) + 1));
 		}
 	}
-	
+	sendToAll((vector<byte) t);
 }
 
+/*
+ *
+ *
+*/
 void receive(Message m){
-
+	ServiceTable t = (ServiceTable) m->_messageContent;
+	_table.mergeTable(t);
+	if(_table.toString != t.toString()){
+		advertise();
+	}
 }
 
+void sendToAll(vector<byte> messageContent){
+	byte messageID = 0x00;
+	byte targetService = 0x00;
+	byte sourceService = 0x01;
+	byte typeOfMessage = 00010;
+	byte messageBitFields = 000;
+	Message m (messageID, targetService, sourceService, typeOfMessage, messageBitFields);
+	for(std::map<int, int>::iterator it = portMap.begin(); it != portMap.end(); ++it){
+		m.sendMessage(it->first);
+	}
+}

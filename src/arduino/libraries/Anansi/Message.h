@@ -24,5 +24,6 @@ public:
 	byte _messageBitfields;
 	vector<byte> _bodyContent;
 	void readMessage();
+	void sendMessage(int port);
 };
 #endif
