@@ -1,4 +1,4 @@
-#include <ResourceDiscovery.h>
+#include "ResourceDiscovery.h"
 #include <HardwareSerial.h>
 
 #include <Message.h>
@@ -31,23 +31,12 @@ void advertise(){
  *
  *
 */
-void receiveAd(Message m){
+void receive(Message m){
 	ServiceTable t = (ServiceTable) m->_messageContent;
 	_table.mergeTable(t);
 	if(_table.toString != t.toString()){
 		advertise();
 	}
-}
-
-void receiveReq(Message m){
-	ServiceTable t = (ServiceTable) m->_messageContent;
-	byte target = m-> _sourceService;
-	byte messageID = 0x00;
-	byte sourceService = 0x01;
-	byte typeOfMessage = 00010;
-	byte messageBitFields = 000;
-	Message m1 (messageID, target, sourceService, typeOfMessage, messageBitFields);
-	m1.sendMessage();
 }
 
 void sendToAll(vector<byte> messageContent){

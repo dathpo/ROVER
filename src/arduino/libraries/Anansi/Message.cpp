@@ -81,13 +81,14 @@ void Message::readMessage() {
 void Message::sendMessage(int port){
 	vector<packet_t> packets = this->toPackets();
 	PacketHandler handler;
+	
 	if(_typeOfMessage == 00010){
 	for(std::vector<packet_t>::iterator it = packets.begin(); it != packets.end(); ++it){
 			handler.sendPacket(it->first, port);
 	}
 	} else {
 		for(std::vector<packet_t>::iterator it = packets.begin(); it != packets.end(); ++it){
-			//Get shortest distance port
+			port = _table.getService(_targetService).getShortestDistance();
 			handler.sendPacket(it->first, port);
 	}
 	}
