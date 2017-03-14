@@ -25,10 +25,46 @@ private:
 
 public:
 	Anansi();	
-	void advertise(String name, int type);
-	void publish(String name, something);
-	void subscribe(String name, void function(something));
+	template<typename T>
+	void advertise(String name);
+	template<typename T>
+	void publish(String name, T data);
+	template<typename T>
+	void subscribe(String name, void function(T));
+	
+	void handleAnansi();
 };
+
+/*
+	usage:
+	
+	Node 1 creates a publisher that publishes 1 constantly: 
+	
+	setup{
+		Anansi comms;
+		advertise<int>("MyTopic");
+	}
+	
+	loop(){
+		handleAnansi();
+		publish<>("MyTopic", 1);
+	}
+	
+	Node 2 creates a subscriber which prints the value of the topic MyTopic every time it receives it:
+	
+	setup(){
+		Anansi comms;
+		subscribe<>("MyTopic", MyFunction);
+	}
+	
+	loop(){
+		handleAnansi();
+	}
+	
+	void MyFunction(int x){
+		cout << "My int is: " << x;
+	}
+*/
 
 
 #endif
