@@ -27,8 +27,10 @@ void Anansi::advertise(byte id, string name) {
 
 template<typename T>
 void Anansi::publish(string name, T data) {
-	Publisher<T> pub = (Publisher<T>) publishers[name];
-	pub.setData(data);
+	if (typeid(publishers[name]) == typeid(Publisher<T>(0, name))) {
+		Publisher<T> * pub = static_cast<Publisher<T>*>(&(publishers[name]));
+		pub->setData(data);
+	}
 }
 
 template<typename T>
@@ -38,4 +40,8 @@ void Anansi::subscribe(string name, void function(T)) {
 
 void Anansi::handleAnansi() {
 
+}
+
+int main() {
+	Anansi anansi = Anansi();
 }
