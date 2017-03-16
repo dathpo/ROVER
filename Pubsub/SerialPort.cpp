@@ -1,6 +1,5 @@
 
 #include "SerialPort.h"
-#include "Comms.h"
 
 #define STARTBYTE 0xFE
 #define ENDBYTE 0xFF

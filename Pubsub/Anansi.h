@@ -9,22 +9,24 @@
 
 #include <map>
 #include <string>
+#include <typeinfo>
 
 #include "Comms.h"
 #include "Service.h"
 #include "ServiceTable.h"
 #include "Types.h"
+#include "Publisher.h"
 
 
 class Anansi {
 private:
-	Service nodeService;
-	Comms comms;
-	ServiceTable serviceTable;
-	map<string, Service> publishers;
+	Service _nodeService;
+	Comms _comms;
+	ServiceTable _serviceTable;
+	map<string, Service> _publishers;
 	Service createService(byte id, string name);
 public:
-	Anansi();
+	Anansi(byte nodeId);
 	virtual ~Anansi();
 	template<typename T>
 	void advertise(byte id,string name);

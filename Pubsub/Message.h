@@ -1,10 +1,14 @@
 #ifndef Message_h
 #define Message_h
 
-#include <Types.h>
+#include "Types.h"
+#include "PacketHandler.h"
+
 #include <iterator>
 #include <vector>
 #include <deque>
+#include <stdlib.h>
+
 class Message {
 //private:
 	//byte _messageID;
@@ -25,4 +29,5 @@ public:
 	vector<byte> _bodyContent;
 	void readMessage();
 };
+
 #endif

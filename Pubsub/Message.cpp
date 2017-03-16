@@ -1,8 +1,4 @@
-#include <Message.h>
-#include <stdlib.h>
-
-
-#include <PacketHandler.h>
+#include "Message.h"
 /*
 * NEED TO WORK OUT HOW TO HAVE STRUCTRE BUT NOT POINTING
 * TO THE SAME STRUCTURE EACH TIME, BUT A DIFFERENT ONE

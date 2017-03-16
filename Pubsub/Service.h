@@ -1,11 +1,7 @@
 #ifndef Service_h
 #define Service_h
 
-#ifdef NOARDUINO
-#include <DummyPort.h>
-#else
-#include <Port.h>
-#endif
+#include "Port.h"
 #include <iterator>
 #include <map>
 #include <string>
@@ -19,8 +15,9 @@ private:
 	bool _local;
 
 public:
+	Service();
 	Service(byte id, string name, bool local);
-	~Service();
+	virtual ~Service();
 	byte getId();
 	string getName();
 	int getOutgoingPort();

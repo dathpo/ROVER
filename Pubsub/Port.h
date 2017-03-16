@@ -13,13 +13,13 @@ public:
 	bool _start_last;
 	bool _end_last;
 	bool _packet_start_rcvd;
-	 int _id;
-	virtual void read() =0;
+	int _id;
+	virtual void read() = 0;
 
-	virtual void write(vector<byte> serializedPacket) =0;
+	virtual void write(vector<byte> serializedPacket) = 0;
 
 	virtual packet_t getPacketFromBuffer() = 0;
-
+	virtual ~Port();
 };
 
 #endif

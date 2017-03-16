@@ -7,9 +7,11 @@
 
 #include "Anansi.h"
 
-Anansi::Anansi() {
-	// TODO Auto-generated constructor stub
-
+Anansi::Anansi(byte nodeId) {
+	_comms = Comms();
+	_serviceTable = ServiceTable();
+	_nodeService = createService(nodeId, "nodeService" + nodeId);
+	_publishers = map<string, Service>();
 }
 
 Anansi::~Anansi() {
@@ -17,18 +19,20 @@ Anansi::~Anansi() {
 }
 
 Service Anansi::createService(byte id, string name) {
-	serviceTable.addService(&Service(id, name, true));
+	Service service(id, name, true); //* service = new Service(id, name, true);
+	_serviceTable.addService(service);
+	return service;
 }
 
 template<typename T>
 void Anansi::advertise(byte id, string name) {
-	publishers[name] = Publisher<T>(id, name);
+	_publishers[name] = Publisher<T>(id, name);
 }
 
 template<typename T>
 void Anansi::publish(string name, T data) {
-	if (typeid(publishers[name]) == typeid(Publisher<T>(0, name))) {
-		Publisher<T> * pub = static_cast<Publisher<T>*>(&(publishers[name]));
+	if (typeid(_publishers[name]) == typeid(Publisher<T>(0, name))) {
+		Publisher<T> * pub = static_cast<Publisher<T>*>(&(_publishers[name]));
 		pub->setData(data);
 	}
 }
@@ -43,5 +47,5 @@ void Anansi::handleAnansi() {
 }
 
 int main() {
-	Anansi anansi = Anansi();
+	Anansi anansi = Anansi(0);
 }

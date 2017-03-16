@@ -10,6 +10,7 @@
 template<class T>
 Publisher<T>::Publisher(byte id, string name) {
 	Service(id, name);
+	_data = NULL;
 }
 
 template<class T>

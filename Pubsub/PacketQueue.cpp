@@ -1,13 +1,9 @@
-#include <PacketQueue.h>
-#include <Types.h>
-#include <iostream>
-#include <Port.h>
-#include <Comms.h>
-#include <Message.h>
-#include <PacketHandler.h>
+#include "PacketQueue.h"
+
 PacketQueue::PacketQueue(){
 	
 }
+
 void PacketQueue::addPacket(packet_t p) {
 	
 		
@@ -15,11 +11,11 @@ void PacketQueue::addPacket(packet_t p) {
 	//try{
 		//cout<< Comms::serviceTable.getService(p.packetHeader.targetService)->getName();
 //		fflush(stdout);
-	if(( Comms::serviceTable.getService(p.packetHeader.targetService)->getName()!="0")&&( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService)->getShortestDistance())){ //dirty hack for the moment until proper error handling
+	if ((Comms::serviceTable.getService(p.packetHeader.targetService).getName() != "0") && (Comms::Comms::serviceTable.getService(p.packetHeader.targetService).getShortestDistance())){ //dirty hack for the moment until proper error handling
 		
 	//	Serial.println("about to send packet back");
 		PacketHandler newPacketHandler;
-		int shortestDistancePort=(( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService))->getShortestDistancePort());
+		int shortestDistancePort=(( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService)).getShortestDistancePort());
 			if(shortestDistancePort>=Comms::portList.size()){
 				//SOmething has gone wrong, we dont have a map to this port ABORT ABORT!!!
 				//cout <<"Error, port not mapped in list. Bad user configuration\n";
@@ -27,7 +23,7 @@ void PacketQueue::addPacket(packet_t p) {
 			}
 		newPacketHandler.sendPacket(p,shortestDistancePort);
 		
-	}else if( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService)->getName()!="0"){
+	}else if( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService).getName()!="0"){
 	_queue.push_back(p);
 	} return;
 	//NOTE WE NEED TO IMPLEMENT TRY CATCHES HERE, ELSE USER CONFIGURATION ERROR WILL CRASH PROGRAM!!!

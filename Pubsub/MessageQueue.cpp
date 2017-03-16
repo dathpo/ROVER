@@ -1,6 +1,7 @@
-#include <MessageQueue.h>
-#include <Comms.h>
+#include "MessageQueue.h"
+
 static deque<Message> _queue;
+
 void MessageQueue::addMessage(Message m) {
 	// TODO - implement MessageQueue::addMessage
 	/**cout <<"adding message to queue\n";
