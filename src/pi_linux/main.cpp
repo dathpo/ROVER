@@ -21,6 +21,7 @@ static std::map<int,int> servicePortMap; //WIll be specific to individual arduin
  * (rover16/mpq), or copy the Msgs library to the library 
  * folder of your sketchbook. 
  */
+
 	static Comms newComms;
   static PortPi p0(0);
  /* static Port p2(1, &Serial2);
