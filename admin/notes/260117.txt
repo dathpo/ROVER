@@ -1,0 +1,54 @@
+ROVER meeting 26/01/17
+
+Possibility of a Rover team visit to a wind turbine later in the semester. 
+
+The DMEM workshop in JW309 is available for soldering/manufacturing - safety training may be required first.
+
+Funding for 2017/18 VIPs will be allocated based on Dragon's Den-style pitches, which will take place at some point next term. We need to put together a good technological/business case for funding, in collaboration with Business students. Otto's in charge of design work for this.
+
+Suggestion for VIP night out (not only ROVER) prior to conference. Send more specific suggestions to Mark.
+
+For next week, all teams should present a plan for how different components will fit together, so that we can come up with a ROVER-wide timeline for the semester. Our goal is to have a functioning rover by the VIP conference. The Electronics team will provide Mechanical and Software teams with a layout of components, and the Software team will send updated documentation and installation instructions for Anansi.
+
+Christos is setting up a Rover Slack account, which we'll use in place of Facebook Messenger.
+
+
+SOFTWARE
+
+We have a working communications system for passing messages around networks of Arduinos and Raspberry Pis, including an IP port for WiFi or ethernet connections. We are still missing resource discovery and the application layer (e.g. publish/subscribe, RPC).
+
+Our aim is to have a pre-release of the communications system available on GitLab by next week - this will be Anansi v0.1.
+
+Publish/subscribe is the easiest communications model to implement, so we are starting with that. We need to be able to publish a number of basic data types, including integers, floats, booleans, and vectors. We need to meet with the Electronics team in the coming weeks to discuss what message types and data types will be required for the finished system. Ideally we also want to be able to send video feed in form of JPEGs.
+
+We have researched the possibility of using a pair of Zigbee short-range radio transmitters as an alternitive telemetry system in order to eliminate WiFi as a single point of failure. As we can send serial data using the Zigbees, this should be easy to implement at a later date.
+
+
+SOFTWARE TASKS
+
+- Documentation: Jack and David P. - Priority is to prepare what we have for release, add documentation on how to install and use the library, and push v0.1 to the master branch for the Electronics team.
+
+- Publish/subscribe: David D., Andrew, and Gary - Design and implement the P/S application layer with appropriate data types.
+
+- IP port: Paul - Finish and test IP port on Pi.
+
+- Resource discovery: Pete and Kyle - Implementation and testing of the RD algorithm established in first semester.
+
+
+New directory structure for the GitLab repository:
+
+src
+	test
+	arduino
+		avr-stl
+		libraries
+			Anansi
+		main
+	pi_linux
+		Anansi
+		main
+	misc
+documentation
+	reqs
+	uml
+README.md

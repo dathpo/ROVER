@@ -1,0 +1,30 @@
+Rover meeting 16/2/17
+
+VIP conference poster presentations: present as one group, ask for an extra poster and some more space as it is a large VIP (one poster per sub-team). Two people from each team will probably be presenting at one time. Everyone should come to the conference, but it is not necessary to be there the entire time - let Mark know availability, there may be a Doodle poll for this.
+
+Motors are being ordered from China, no word yet on delivery date. Stand-in motors can be used for now.
+
+Electronics team will send list of data types needed for pub/sub, as well as examples of code for nodes which we can use to check how they will integrate with Anansi. Required data types will probably be limited to primitive types and vectors of primitive types, most likely integers and floats. Strings may also be required.
+
+
+
+
+int32 = 1
+float32 = 2
+string = 3
+vect = 4
+vect<int32> = 41, etc. // vect != stl vector
+
+message format: <pub msg id><data type id><raw data>
+
+
+
+TODO
+
+pub/sub
+errors
+rd
+try catch on arduino
+concurrent message processing
+message spec documentation
+message processing

@@ -1,0 +1,13 @@
+ROVER meeting 9/2/17
+
+Demos: mechanical had scaled-down model gear rig
+Electronics: sensors rig with arduino, printing data to Serial (IR, ultrasonic, CO2)
+
+
+Risk assessment for software team
+
+Software: UDP sending packages, building messages, and routing
+
+pub/sub: aim to demo in two weeks
+
+Software should be usable by electronics team by start of March
