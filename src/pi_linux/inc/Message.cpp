@@ -10,7 +10,7 @@
 
 
 Message::Message(byte messageID, byte targetService, byte sourceService, byte typeOfMessage, byte messageBitfields, vector<byte> bodyContent) {
-	printf("%d",int(targetService));
+	//printf("%d",int(targetService));
 	_messageID = messageID;
 	_targetService = targetService;
 	_sourceService = sourceService;

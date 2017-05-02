@@ -7,14 +7,14 @@ PacketQueue::PacketQueue(){
 	
 }
 void PacketQueue::addPacket(packet_t p) {
-	printf("entered add packet");
+	//printf("entered add packet");
 	fflush(stdout);
 	try{
 		cout<<serviceTable.getService(p.packetHeader.targetService)->getName();
 		fflush(stdout);
 	if((serviceTable.getService(p.packetHeader.targetService)->getName()!="0")&&(serviceTable.getService(p.packetHeader.targetService)->getShortestDistance())){ //dirty hack for the moment until proper error handling
 		
-		printf("about to send packet back");
+		printf("Routing packet to correct destination. \n");
 		PacketHandler newPacketHandler;
 		int shortestDistancePort=((serviceTable.getService(p.packetHeader.targetService))->getShortestDistancePort());
 			if(shortestDistancePort>=portList.size()){
@@ -84,10 +84,6 @@ Message PacketQueue::checkPacketQueue() {
 
 				}
 
-				cout << hex << "Testing First Packet" << endl;
-				cout << hex << _queue.size() << endl;
-				cout << hex <<int( _queue[0].packetHeader.messageID) <<endl;
-				cout << hex << int(_queue[0].packetHeader.packetID) << endl;
 				cout << "Building Message" << endl;
 				
 
@@ -118,7 +114,7 @@ Message PacketQueue::buildMessage(vector<packet_t> p) {
 	byte messageBitfields = p[0].dataContent[1] & 0x7;
 	vector<byte> bodyContent;
 
-				cout << hex <<int( messageID) <<endl;
+				//cout << hex <<int( messageID) <<endl;
 	for (int i = 0; i < p.size(); i++) { //grab body content from each of the packets and push it to bodycontent var
 		if (i == 0) {
 			int y = 2; //if this is first packet, skip message header

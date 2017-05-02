@@ -16,7 +16,7 @@ SerialPort::SerialPort(int id, HardwareSerial *serial) {
 }
 void SerialPort::read() {
 	while (_serial->available() > 0) {
-				Serial.println("Data available");
+				//Serial.println("Data available");
 		byte b = _serial->read();
 		if (b == STARTBYTE) {
 			if (_start_last) { // byte-stuffed start byte
@@ -31,7 +31,7 @@ void SerialPort::read() {
 				//Message newMessage=packetQueue.checkPacketQueue();  
 				//messageQueue.addMessage(newMessage);
 				
-				Serial.println("Message added to queue");
+				//Serial.println("Message added to queue");
 				_buffer.clear();
 				_packet_start_rcvd = false;
 			} else {
@@ -89,6 +89,7 @@ void SerialPort::write(vector<byte> packet) {
 packet_t SerialPort::getPacketFromBuffer() {
 	// Check if buffer has complete packet, if so return
 	// TODO - implement Port::getPacketFromBuffer
+	Serial.println("Processing Recieved Packet:");
 	packet_header_t tempPacketHeader;
 	tempPacketHeader.flags=_buffer[0] & 0x7;
 	tempPacketHeader.messageID=_buffer[0] & 0x1F;
@@ -96,18 +97,18 @@ packet_t SerialPort::getPacketFromBuffer() {
 	tempPacketHeader.sourceService=_buffer[2];
 	tempPacketHeader.packetID=_buffer[3];
 	tempPacketHeader.crc=_buffer[4];
-	Serial.println(tempPacketHeader.crc);
+	//Serial.println(tempPacketHeader.crc);
 	packet_t testPacket;
 	testPacket.packetHeader=tempPacketHeader;
 	
-	Serial.println(tempPacketHeader.crc);
+	//Serial.println(tempPacketHeader.crc);
 	testPacket.dataContent.reserve(59);
-	for(int i=5;i<_buffer.size();i++){
+	for(int i=0;i<_buffer.size();i++){
 		
-		Serial.println(i);
+		Serial.print(_buffer[i]);
 		testPacket.dataContent.push_back(_buffer[i]);
 	}
 	
-	Serial.println("Returning TestPacket");
+		Serial.println("");
 	return testPacket;
 }

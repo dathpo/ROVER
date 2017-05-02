@@ -34,7 +34,7 @@ int Service::getOutgoingPort() {
 int Service::getShortestDistance() {
 
 	int d = -1;
-			printf("got to here d=-1");
+			//printf("got to here d=-1");
 		fflush(stdout);
 	for (std::map<int, int>::iterator it = _portMap.begin(); it != _portMap.end(); ++it) {
 				//cout<<_name;
@@ -44,7 +44,7 @@ int Service::getShortestDistance() {
 			d = it->second;
 		}
 	}
-			printf("got to here returning d");
+			//printf("got to here returning d");
 		fflush(stdout);
 	return d;
 }

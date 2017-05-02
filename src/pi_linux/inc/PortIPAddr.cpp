@@ -15,8 +15,8 @@
 struct sockaddr_in myaddr;      /* our address */
 struct sockaddr_in remaddr;     /* remote address */
 socklen_t addrlen = sizeof(remaddr);            /* length of addresses */
-int recvlen;                    /* # bytes received */
-int fd;                         /* our socket */
+int recvlen;                    /* # bytes received */                         /* our socket */
+int fd1;
 
 std::mutex mtx;           // mutex for critical section
 PortIPAddr::PortIPAddr(int id) {
@@ -25,7 +25,7 @@ PortIPAddr::PortIPAddr(int id) {
 	_end_last = false;
 	_packet_start_rcvd = false;
 	_buffer.reserve(BUFSIZE);
-	  if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+	  if ((fd1 = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
                 perror("cannot create socket\n");
         }
 
@@ -39,7 +39,7 @@ PortIPAddr::PortIPAddr(int id) {
         myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
         myaddr.sin_port = htons(PORT);
 	
-	if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
+	if (bind(fd1, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
                 perror("bind failed");
 
         }
@@ -47,11 +47,11 @@ PortIPAddr::PortIPAddr(int id) {
 
 void PortIPAddr::read() {
 	mtx.lock();
-	//recvlen = recvfrom(fd, tempBuffer, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
+	//recvlen = recvfrom(fd1, tempBuffer, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
 	char buffer[549];
 	struct sockaddr_storage src_addr;
 	socklen_t src_addr_len=sizeof(src_addr);
-	ssize_t count=recvfrom(fd,buffer,sizeof(buffer),0,(struct sockaddr*)&src_addr,&src_addr_len);
+	ssize_t count=recvfrom(fd1,buffer,sizeof(buffer),0,(struct sockaddr*)&src_addr,&src_addr_len);
 	if (count==-1) {
     		cout << "ERROR";
 	} else if (count==sizeof(buffer)) {
@@ -68,7 +68,7 @@ void PortIPAddr::read() {
 void PortIPAddr::handleData(char *buffer,int dataSize) {
   for(int buffSize=0;buffSize<dataSize;buffSize++){
     byte b = buffer[buffSize] ;
-    printf ("%d\n",int(b));
+    //printf ("%d\n",int(b));
     if (b == STARTBYTE) {
       if (_start_last) { // byte-stuffed start byte
         if (_packet_start_rcvd) {
@@ -88,7 +88,8 @@ void PortIPAddr::handleData(char *buffer,int dataSize) {
 				printf ("%d",int(_buffer[i]));
 			}
 			
-		printf ("Testing Packet");
+			printf ("\n");
+		//printf ("Testing Packet");
 		fflush(stdout);
           // send the packet to the packet queue
           _buffer.clear();
@@ -143,7 +144,7 @@ void PortIPAddr::handleData(char *buffer,int dataSize) {
 
 
 void PortIPAddr::write(vector<byte> packet) {
-	sendto(fd, packet.data(), packet.size(), 0, (struct sockaddr *)&remaddr, addrlen);
+	sendto(fd1, packet.data(), packet.size(), 0, (struct sockaddr *)&remaddr, addrlen);
 }
 
 packet_t PortIPAddr::getPacketFromBuffer() {

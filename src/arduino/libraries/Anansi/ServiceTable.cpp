@@ -11,11 +11,11 @@ ServiceTable::~ServiceTable() {
 Service* ServiceTable::getService(byte id) {
 
 		//Serial.println(_table.size());
-		Serial.println("entered getService");
+		//Serial.println("entered getService");
 		
-		Serial.println(_table.size());
+		//Serial.println(_table.size());
 	if(_table.size()>id){
-		Serial.println(id);
+		//Serial.println(id);
 	return _table[id];
 	}else{ static Service newService(0,"0",false); 
 		Serial.println("Failure"); 
@@ -24,7 +24,7 @@ Service* ServiceTable::getService(byte id) {
 
 /* Adds a service to the look-up table. Existing service will be merged into if present. */
 void ServiceTable::addService(Service *s) {
-	Serial.println("Added a service");
+	//Serial.println("Added a service");
 	int id = s->getId();
 	if (_table.find(id) == _table.end()) { // Service is not yet in table
 		_table[id] = s;

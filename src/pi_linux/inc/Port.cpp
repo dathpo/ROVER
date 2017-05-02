@@ -29,8 +29,8 @@ void Port::read() {
 	}
   while (serialDataAvail(fd)  > 0) {
     byte b = serialGetchar (fd) ;
-	 cout << "Data on the line:";
-    cout << hex << int(b);
+	 //cout << "Data on the line:";
+   // cout << hex << int(b);
     if (b == STARTBYTE) {
       if (_start_last) { // byte-stuffed start byte
         if (_packet_start_rcvd) {
@@ -75,7 +75,7 @@ void Port::read() {
     else {
       if (_start_last) {
         // start of new packet
-    printf ("START OF NEW PACKET");
+    //printf ("START OF NEW PACKET");
         _buffer.clear();
         _start_last = false;
         _packet_start_rcvd = true;
@@ -87,7 +87,7 @@ void Port::read() {
         _packet_start_rcvd = false;
       }
       if (_packet_start_rcvd) {
-    printf ("%c\n",b);
+   // printf ("%c\n",b);
         _buffer.push_back(b);
       }
     }

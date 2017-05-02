@@ -19,7 +19,7 @@ packet_t PacketHandler::createPacket(byte flags,byte messageID, byte packetID, b
 }
 
 void PacketHandler::sendPacket(packet_t p, int port) {
-	cout <<"Send Packet Back";
+	//cout <<"Send Packet Back";
 	vector<byte> serializedPacket;
 	
 	byte size= sizeof(p.packetHeader)+p.dataContent.size(); //get total packet size

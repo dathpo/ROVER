@@ -17,7 +17,7 @@ void PacketQueue::addPacket(packet_t p) {
 		fflush(stdout);
 	if(( Comms::serviceTable.getService(p.packetHeader.targetService)->getName()!="0")&&( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService)->getShortestDistance())){ //dirty hack for the moment until proper error handling
 		
-		Serial.println("about to send packet back");
+		Serial.println("Routing packet to correct destination");
 		PacketHandler newPacketHandler;
 		int shortestDistancePort=(( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService))->getShortestDistancePort());
 			if(shortestDistancePort>=Comms::portList.size()){
@@ -29,6 +29,8 @@ void PacketQueue::addPacket(packet_t p) {
 		
 	}else if( Comms:: Comms::serviceTable.getService(p.packetHeader.targetService)->getName()!="0"){
 	_queue.push_back(p);
+	Serial.println("Adding Packet to Queue.");
+
 	} return;
 	//NOTE WE NEED TO IMPLEMENT TRY CATCHES HERE, ELSE USER CONFIGURATION ERROR WILL CRASH PROGRAM!!!
 	//ARDUINO DOES NOT SUPPORT TRY CATCH!

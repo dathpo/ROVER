@@ -41,18 +41,29 @@ void setup() {
 void loop() {
 	vector<byte>  newPacket;
 	newPacket.push_back(0xFE);
+	newPacket.push_back(0xFB);
+	newPacket.push_back(0x2);
 	newPacket.push_back(0x1);
 	newPacket.push_back(0x1);
 	newPacket.push_back(0x1);
+	newPacket.push_back(0x2);
 	newPacket.push_back(0x1);
+	newPacket.push_back(0xFF);
+	newPacket.push_back(0xFE);
+  sleep(1);
+	newPacket.push_back(0xFE);
+	newPacket.push_back(0xFB);
+	newPacket.push_back(0x2);
 	newPacket.push_back(0x1);
+	newPacket.push_back(0x2);
 	newPacket.push_back(0x1);
+	newPacket.push_back(0x2);
 	newPacket.push_back(0x1);
 	newPacket.push_back(0xFF);
 	newPacket.push_back(0xFE);
   p0.write(newPacket);
 cout <<"Loop";
-  usleep(10000);
+  sleep(1);
 }
 
 int main(){

@@ -2,8 +2,8 @@
 
 void MessageQueue::addMessage(Message m) {
 	// TODO - implement MessageQueue::addMessage
-	cout <<"adding message to queue\n";
-	cout <<"message id:";
+	cout <<"adding message to queue";
+	cout <<"/nmessage id:";
 	cout << hex <<int(m._messageID);
 	_queue.push_back(m);
 }
